@@ -1,0 +1,204 @@
+@import url('https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;0,6..96,600;0,6..96,700;1,6..96,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Outfit:wght@200;300;400;500;600&display=swap');
+
+@import "tailwindcss";
+
+@theme {
+  /* ── Color Palette: Cool Editorial Luxury ── */
+  --color-cream: #F7F6F3;
+  --color-cream-dark: #EEEDEA;
+  --color-parchment: #E0DFDB;
+  --color-stone: #B5B3AD;
+  --color-stone-dark: #918F89;
+  --color-charcoal: #333333;
+  --color-charcoal-light: #5C5C5C;
+  --color-ink: #111111;
+  --color-white: #FFFFFF;
+  --color-accent: #8A7968;
+  --color-accent-light: #A69484;
+  --color-accent-dark: #6D5F50;
+  --color-success: #4A7C59;
+  --color-error: #9B3B3B;
+
+  /* ── Typography ── */
+  --font-sans: "Outfit", "Helvetica Neue", Arial, sans-serif;
+  --font-serif: "Cormorant Garamond", "Georgia", serif;
+  --font-display: "Bodoni Moda", "Didot", "Bodoni MT", Georgia, serif;
+
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.25rem;
+  --text-2xl: 1.5rem;
+  --text-3xl: 1.875rem;
+  --text-4xl: 2.25rem;
+  --text-5xl: 3rem;
+  --text-6xl: 3.75rem;
+  --text-7xl: 4.5rem;
+  --text-8xl: 6rem;
+  --text-9xl: 8rem;
+
+  --tracking-tightest: -0.03em;
+  --tracking-tight: -0.02em;
+  --tracking-normal: 0;
+  --tracking-wide: 0.06em;
+  --tracking-wider: 0.12em;
+  --tracking-widest: 0.22em;
+
+  --leading-none: 1;
+  --leading-tight: 1.1;
+  --leading-snug: 1.25;
+  --leading-normal: 1.55;
+  --leading-relaxed: 1.7;
+
+  /* ── Spacing ── */
+  --spacing-section: 8rem;
+  --spacing-section-sm: 5rem;
+
+  /* ── Easing ── */
+  --ease-luxury: cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* ── Breakpoints ── */
+  --breakpoint-xs: 475px;
+  --breakpoint-sm: 640px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1280px;
+  --breakpoint-2xl: 1536px;
+}
+
+/* ── Base Resets ── */
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+:root {
+  /* Fixed header stack: keep in sync with announcement bar + main nav (+ mobile search row via Main padding). */
+  --announcement-h: 3.25rem;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: #ffffff;
+  color: var(--color-charcoal);
+  font-weight: 300;
+  letter-spacing: 0.015em;
+  line-height: var(--leading-normal);
+}
+
+::selection {
+  background-color: var(--color-ink);
+  color: var(--color-cream);
+}
+
+/* ── Typography Utilities ── */
+.font-editorial {
+  font-family: var(--font-serif);
+  font-weight: 300;
+}
+
+/* High-contrast display (Zara-style logotype) */
+.font-display {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-optical-sizing: auto;
+}
+
+.text-balance {
+  text-wrap: balance;
+}
+
+/* ── Premium Button Styles ── */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem 3rem;
+  background-color: var(--color-ink);
+  color: var(--color-cream);
+  font-family: var(--font-sans);
+  font-size: 0.6875rem;
+  font-weight: 400;
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  transition: all 0.5s var(--ease-luxury);
+  border: 1px solid var(--color-ink);
+}
+
+.btn-primary:hover {
+  background-color: transparent;
+  color: var(--color-ink);
+}
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem 3rem;
+  background-color: transparent;
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  font-size: 0.6875rem;
+  font-weight: 400;
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  border: 1px solid var(--color-stone);
+  transition: all 0.5s var(--ease-luxury);
+}
+
+.btn-secondary:hover {
+  border-color: var(--color-ink);
+  background-color: var(--color-ink);
+  color: var(--color-cream);
+}
+
+/* ── Divider ── */
+.divider {
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    var(--color-parchment),
+    transparent
+  );
+}
+
+/* ── Scrollbar Styling ── */
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-stone);
+  border-radius: 2px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-stone-dark);
+}
+
+/* ── Image Shimmer Loading ── */
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.img-loading {
+  background: linear-gradient(
+    90deg,
+    var(--color-cream-dark) 25%,
+    var(--color-parchment) 50%,
+    var(--color-cream-dark) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
