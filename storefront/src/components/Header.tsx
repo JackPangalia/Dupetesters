@@ -50,7 +50,7 @@ export default function Header() {
   return (
     <>
       {/* Announcement */}
-      <div className="fixed top-0 left-0 right-0 z-[60] min-h-[var(--announcement-h)] flex items-center justify-center bg-white border-b border-neutral-200 text-center text-xs sm:text-sm py-2 px-4 text-[#c41e3a]">
+      <div className="fixed top-0 left-0 right-0 z-[60] min-h-[var(--announcement-h)] flex items-center justify-center bg-cream border-b border-parchment text-center text-xs sm:text-sm py-2 px-4 text-accent">
         {qualifies ? (
           <span>You qualify for free UK shipping on this order.</span>
         ) : (
@@ -138,12 +138,12 @@ export default function Header() {
               <button
                 type="button"
                 onClick={openCart}
-                className="relative p-2 text-white/90 hover:text-white"
+                className="group relative p-2 text-white/90 hover:text-white transition-colors duration-300"
                 aria-label={`Cart, ${itemCount} items`}
               >
                 <ShoppingCart size={21} strokeWidth={1.5} />
                 {itemCount > 0 && (
-                  <span className="absolute -top-0.5 -right-0.5 min-w-[18px] h-[18px] px-1 flex items-center justify-center rounded-full bg-[#c41e3a] text-[10px] font-bold text-white">
+                  <span className="absolute -top-0.5 -right-0.5 min-w-[18px] h-[18px] px-1 flex items-center justify-center rounded-full bg-accent text-[10px] font-bold text-cream shadow-sm transition-transform duration-300 motion-safe:group-hover:scale-105">
                     {itemCount > 99 ? "99+" : itemCount}
                   </span>
                 )}

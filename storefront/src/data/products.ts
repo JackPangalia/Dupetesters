@@ -25,8 +25,8 @@ export const products: Product[] = [
     price: 42.99,
     currency: "GBP",
     images: [
-      "https://images.unsplash.com/photo-1587017539504-67cfbddac569?w=800&q=80",
-      "https://images.unsplash.com/photo-1523293182086-7651a899d37f?w=800&q=80",
+      "https://images.unsplash.com/photo-1523293182086-7651a899d37f?w=1200&q=85",
+      "https://images.unsplash.com/photo-1541643600914-78b084683601?w=1200&q=85",
     ],
     category: "Pack",
     collection: "sampler-packs",
@@ -45,7 +45,6 @@ export const products: Product[] = [
     },
     size: "5 × 2ml tester vials",
     inStock: true,
-    badge: "new",
     rating: 4.9,
     reviewCount: 128,
     packItems: [

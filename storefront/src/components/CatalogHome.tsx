@@ -108,11 +108,11 @@ export default function CatalogHome() {
   };
 
   return (
-    <div className="bg-white text-neutral-800">
-      <div className="max-w-[1600px] mx-auto px-4 sm:px-5 lg:px-8 py-6 lg:py-8">
-        <div className="flex flex-col lg:flex-row gap-8 lg:gap-10">
+    <div className="bg-cream text-neutral-800 min-h-screen">
+      <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-10 py-8 lg:py-12">
+        <div className="flex flex-col lg:flex-row gap-10 lg:gap-14">
           {/* Sidebar */}
-          <aside className="w-full lg:w-[260px] shrink-0 space-y-6">
+          <aside className="w-full lg:w-[272px] shrink-0 space-y-8">
             <div>
               <label htmlFor="catalog-filter-search" className="sr-only">
                 Search testers
@@ -123,11 +123,11 @@ export default function CatalogHome() {
                 placeholder="Search this list…"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full border border-neutral-300 rounded-sm px-3 py-2 text-sm placeholder:text-neutral-400 focus:outline-none focus:ring-1 focus:ring-neutral-900 focus:border-neutral-900"
+                className="w-full border border-neutral-200 bg-white rounded-sm px-3 py-2.5 text-sm placeholder:text-neutral-400 focus:outline-none focus:ring-1 focus:ring-accent/40 focus:border-accent transition-[border-color,box-shadow] duration-300"
               />
             </div>
 
-            <details open className="border-b border-neutral-200 pb-5">
+            <details open className="border-b border-neutral-200/80 pb-6">
               <summary className="cursor-pointer text-sm font-semibold text-neutral-900 list-none flex justify-between items-center">
                 Price
                 <span className="text-neutral-400 font-normal text-xs">▼</span>
@@ -140,7 +140,7 @@ export default function CatalogHome() {
                     max={priceCeiling}
                     value={priceMin}
                     onChange={(e) => onMinChange(Number(e.target.value))}
-                    className="w-full accent-[#c41e3a] h-1"
+                    className="w-full accent-accent h-1"
                   />
                   <input
                     type="range"
@@ -148,7 +148,7 @@ export default function CatalogHome() {
                     max={priceCeiling}
                     value={priceMax}
                     onChange={(e) => onMaxChange(Number(e.target.value))}
-                    className="w-full accent-[#c41e3a] h-1"
+                    className="w-full accent-accent h-1"
                   />
                 </div>
                 <div className="grid grid-cols-2 gap-2">
@@ -194,7 +194,7 @@ export default function CatalogHome() {
                     key={L}
                     type="button"
                     onClick={() => jumpToLetter(L)}
-                    className="text-[11px] w-6 h-6 flex items-center justify-center text-neutral-600 hover:text-[#c41e3a] hover:underline"
+                    className="text-[11px] w-6 h-6 flex items-center justify-center text-neutral-600 hover:text-accent hover:underline transition-colors duration-200"
                   >
                     {L}
                   </button>
@@ -204,12 +204,12 @@ export default function CatalogHome() {
                 <button
                   type="button"
                   onClick={clearBrands}
-                  className="text-xs text-[#c41e3a] underline mb-2"
+                  className="text-xs text-accent underline mb-2 transition-colors hover:text-accent-dark"
                 >
                   Clear brands
                 </button>
               )}
-              <div className="max-h-[320px] overflow-y-auto border border-neutral-200 rounded-sm divide-y divide-neutral-100">
+              <div className="max-h-[320px] overflow-y-auto border border-neutral-200/80 bg-white rounded-sm divide-y divide-neutral-100 shadow-sm">
                 {LETTERS.map((letter) => {
                   const group = brands.filter(
                     (b) => b.charAt(0).toUpperCase() === letter
@@ -226,7 +226,7 @@ export default function CatalogHome() {
                             type="checkbox"
                             checked={selectedBrands.has(brand)}
                             onChange={() => toggleBrand(brand)}
-                            className="rounded border-neutral-300 accent-[#c41e3a]"
+                            className="rounded border-neutral-300 accent-accent"
                           />
                           <span>{brand}</span>
                         </label>
@@ -240,11 +240,11 @@ export default function CatalogHome() {
 
           {/* Main */}
           <div className="flex-1 min-w-0">
-            <header className="mb-6">
+            <header className="mb-8 lg:mb-10">
               <h1 className="text-2xl lg:text-3xl font-bold text-neutral-900 tracking-tight">
                 Dupe testers
               </h1>
-              <p className="mt-2 text-sm text-neutral-600 max-w-2xl leading-relaxed">
+              <p className="mt-3 text-sm text-neutral-600 max-w-2xl leading-relaxed">
                 Small sampler vials of dupe fragrances — we curate packs of
                 five so you can try a seasonal edit at home. Individual lines
                 below show what&apos;s inside the Spring &amp; Summer pack;
@@ -253,9 +253,9 @@ export default function CatalogHome() {
             </header>
 
             {pack && (
-              <section className="mb-8 border border-neutral-200 rounded-sm overflow-hidden bg-neutral-50/50">
+              <section className="mb-10 lg:mb-12 border border-neutral-200/70 rounded-md overflow-hidden bg-white shadow-sm ring-1 ring-black/[0.03]">
                 <div className="grid md:grid-cols-2 gap-0">
-                  <div className="relative aspect-[4/3] md:aspect-auto md:min-h-[280px] bg-white">
+                  <div className="relative aspect-[4/3] md:aspect-auto md:min-h-[300px] bg-white">
                     <Image
                       src={pack.images[0]}
                       alt={pack.name}
@@ -265,8 +265,8 @@ export default function CatalogHome() {
                       priority
                     />
                   </div>
-                  <div className="p-6 lg:p-8 flex flex-col justify-center bg-white">
-                    <p className="text-[11px] font-semibold uppercase tracking-widest text-[#c41e3a] mb-2">
+                  <div className="p-6 lg:p-10 flex flex-col justify-center bg-cream/40">
+                    <p className="text-[11px] font-semibold uppercase tracking-widest text-accent mb-2">
                       Featured — Summer collection
                     </p>
                     <h2 className="text-xl lg:text-2xl font-bold text-neutral-900">
@@ -280,7 +280,7 @@ export default function CatalogHome() {
                     </p>
                     <Link
                       href="/products/spring-summer-pack"
-                      className="mt-6 inline-flex items-center justify-center w-fit px-6 py-3 bg-[#c41e3a] text-white text-xs font-semibold uppercase tracking-wider hover:bg-[#a01830] transition-colors"
+                      className="mt-6 inline-flex items-center justify-center w-fit px-6 py-3 bg-accent text-cream text-xs font-semibold uppercase tracking-wider hover:bg-accent-dark transition-[background-color,transform] duration-300 motion-safe:hover:-translate-y-0.5 shadow-sm"
                     >
                       View pack &amp; buy
                     </Link>
@@ -289,7 +289,7 @@ export default function CatalogHome() {
               </section>
             )}
 
-            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 py-3 border-y border-neutral-200 mb-6">
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 py-4 border-y border-neutral-200/80 mb-8">
               <label className="flex items-center gap-2 text-sm text-neutral-700">
                 <span className="text-neutral-500">Sort by:</span>
                 <select
@@ -297,7 +297,7 @@ export default function CatalogHome() {
                   onChange={(e) =>
                     setSortBy(e.target.value as CatalogSort)
                   }
-                  className="border border-neutral-300 rounded-sm px-2 py-1.5 text-sm bg-white focus:outline-none focus:ring-1 focus:ring-neutral-900"
+                  className="border border-neutral-200 rounded-sm px-2 py-1.5 text-sm bg-white focus:outline-none focus:ring-1 focus:ring-accent/35"
                 >
                   <option value="bestselling">Best selling</option>
                   <option value="price-asc">Price: low to high</option>
@@ -313,28 +313,9 @@ export default function CatalogHome() {
               </p>
             </div>
 
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
-              {filtered.map((p, i) => (
-                <div key={p.id} className="contents">
-                  {i === 2 && (
-                    <div className="col-span-2 bg-[#c41e3a] text-white p-6 lg:p-8 flex flex-col justify-center min-h-[200px] rounded-sm border border-[#a01830]">
-                      <p className="text-lg lg:text-xl font-semibold leading-snug">
-                        Not sure what to try first?
-                      </p>
-                      <p className="mt-2 text-sm text-white/90 leading-relaxed">
-                        The Spring &amp; Summer pack bundles all five testers
-                        in one shipment — easiest way to sample the full edit.
-                      </p>
-                      <Link
-                        href="/products/spring-summer-pack"
-                        className="mt-4 text-xs font-bold uppercase tracking-wider underline underline-offset-4 hover:text-white/80 w-fit"
-                      >
-                        Shop the pack
-                      </Link>
-                    </div>
-                  )}
-                  <RetailProductCard product={p} />
-                </div>
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5 lg:gap-6">
+              {filtered.map((p) => (
+                <RetailProductCard key={p.id} product={p} />
               ))}
             </div>
 

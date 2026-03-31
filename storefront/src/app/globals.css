@@ -1,28 +1,26 @@
-@import url('https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;0,6..96,600;0,6..96,700;1,6..96,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Outfit:wght@200;300;400;500;600&display=swap');
-
 @import "tailwindcss";
 
 @theme {
-  /* ── Color Palette: Cool Editorial Luxury ── */
-  --color-cream: #F7F6F3;
-  --color-cream-dark: #EEEDEA;
-  --color-parchment: #E0DFDB;
-  --color-stone: #B5B3AD;
-  --color-stone-dark: #918F89;
-  --color-charcoal: #333333;
-  --color-charcoal-light: #5C5C5C;
+  /* ── Color Palette: crisp neutrals + emerald accent (distinct from competitor red) ── */
+  --color-cream: #FAFAF8;
+  --color-cream-dark: #F2F1EE;
+  --color-parchment: #E8E7E3;
+  --color-stone: #A8A7A2;
+  --color-stone-dark: #85847E;
+  --color-charcoal: #2E2E2E;
+  --color-charcoal-light: #5A5A5A;
   --color-ink: #111111;
   --color-white: #FFFFFF;
-  --color-accent: #8A7968;
-  --color-accent-light: #A69484;
-  --color-accent-dark: #6D5F50;
-  --color-success: #4A7C59;
-  --color-error: #9B3B3B;
+  --color-accent: #156B52;
+  --color-accent-light: #1E8B6A;
+  --color-accent-dark: #0E4A38;
+  --color-success: #1A6B52;
+  --color-error: #6B3D48;
 
   /* ── Typography ── */
-  --font-sans: "Outfit", "Helvetica Neue", Arial, sans-serif;
-  --font-serif: "Cormorant Garamond", "Georgia", serif;
-  --font-display: "Bodoni Moda", "Didot", "Bodoni MT", Georgia, serif;
+  --font-sans: var(--font-outfit), "Helvetica Neue", Arial, sans-serif;
+  --font-serif: var(--font-cormorant), "Georgia", serif;
+  --font-display: var(--font-bodoni), "Didot", "Bodoni MT", Georgia, serif;
 
   --text-xs: 0.75rem;
   --text-sm: 0.875rem;
@@ -84,11 +82,17 @@ html {
 
 body {
   font-family: var(--font-sans);
-  background-color: #ffffff;
+  background-color: var(--color-cream);
   color: var(--color-charcoal);
   font-weight: 300;
   letter-spacing: 0.015em;
   line-height: var(--leading-normal);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
 }
 
 ::selection {
@@ -126,13 +130,23 @@ body {
   font-weight: 400;
   letter-spacing: var(--tracking-widest);
   text-transform: uppercase;
-  transition: all 0.5s var(--ease-luxury);
+  transition:
+    background-color 0.45s var(--ease-luxury),
+    color 0.45s var(--ease-luxury),
+    border-color 0.45s var(--ease-luxury),
+    transform 0.45s var(--ease-luxury);
   border: 1px solid var(--color-ink);
 }
 
 .btn-primary:hover {
   background-color: transparent;
   color: var(--color-ink);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .btn-primary:hover {
+    transform: translateY(-1px);
+  }
 }
 
 .btn-secondary {
@@ -148,13 +162,23 @@ body {
   letter-spacing: var(--tracking-widest);
   text-transform: uppercase;
   border: 1px solid var(--color-stone);
-  transition: all 0.5s var(--ease-luxury);
+  transition:
+    border-color 0.45s var(--ease-luxury),
+    background-color 0.45s var(--ease-luxury),
+    color 0.45s var(--ease-luxury),
+    transform 0.45s var(--ease-luxury);
 }
 
 .btn-secondary:hover {
   border-color: var(--color-ink);
   background-color: var(--color-ink);
   color: var(--color-cream);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .btn-secondary:hover {
+    transform: translateY(-1px);
+  }
 }
 
 /* ── Divider ── */

@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { ShoppingBag } from "lucide-react";
 import type { Product } from "@/lib/types";
 import { formatPrice } from "@/lib/utils";
@@ -22,13 +22,18 @@ const badgeStyles = {
 export default function ProductCard({ product, index = 0 }: ProductCardProps) {
   const { addItem } = useCart();
   const isPack = product.kind === "pack";
+  const reduceMotion = useReducedMotion();
 
   return (
     <motion.article
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
+      initial={reduceMotion ? false : { opacity: 0, y: 20 }}
+      whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-40px" }}
-      transition={{ duration: 0.8, delay: index * 0.08, ease: [0.16, 1, 0.3, 1] }}
+      transition={
+        reduceMotion
+          ? { duration: 0 }
+          : { duration: 0.8, delay: index * 0.08, ease: [0.16, 1, 0.3, 1] }
+      }
       className="group relative"
     >
       <Link href={`/products/${product.slug}`} className="block">
@@ -37,7 +42,7 @@ export default function ProductCard({ product, index = 0 }: ProductCardProps) {
             src={product.images[0]}
             alt={product.name}
             fill
-            className="object-cover transition-transform duration-[1.2s] ease-[var(--ease-luxury)] group-hover:scale-[1.03]"
+            className="object-cover transition-transform duration-[1.2s] ease-[var(--ease-luxury)] group-hover:scale-[1.03] motion-reduce:transition-none motion-reduce:group-hover:scale-100"
             sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
           />
 
@@ -58,8 +63,8 @@ export default function ProductCard({ product, index = 0 }: ProductCardProps) {
           )}
 
           <motion.button
-            whileHover={{ scale: 1.04 }}
-            whileTap={{ scale: 0.96 }}
+            whileHover={reduceMotion ? undefined : { scale: 1.04 }}
+            whileTap={reduceMotion ? undefined : { scale: 0.96 }}
             onClick={(e) => {
               e.preventDefault();
               addItem(product);

@@ -118,7 +118,9 @@ export default function ProductPage() {
                 src={product.images[selectedImage]}
                 alt={product.name}
                 fill
-                className="object-cover"
+                className={
+                  isPack ? "object-contain p-6 sm:p-10" : "object-cover"
+                }
                 sizes="(max-width: 1024px) 100vw, 50vw"
                 priority
               />
@@ -142,7 +144,7 @@ export default function ProductPage() {
                       src={img}
                       alt={`${product.name} view ${i + 1}`}
                       fill
-                      className="object-cover"
+                      className={isPack ? "object-contain p-1" : "object-cover"}
                       sizes="80px"
                     />
                   </button>
