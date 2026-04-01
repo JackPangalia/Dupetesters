@@ -1,333 +1,56 @@
 "use client";
 
-import Image from "next/image";
-import Link from "next/link";
 import { useMemo } from "react";
-import {
-  getCatalogGridProducts,
-  getProductBySlug,
-} from "@/data/products";
+import { getCatalogGridProducts } from "@/data/products";
 import type { Product } from "@/lib/types";
-import {
-  useCatalogFilters,
-  type CatalogSort,
-} from "@/lib/catalog-filter-context";
-import { formatPrice } from "@/lib/utils";
 import RetailProductCard from "@/components/RetailProductCard";
-
-const LETTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
-
-function normalize(s: string) {
-  return s.toLowerCase().trim();
-}
-
-function productSearchHaystack(p: Product) {
-  return normalize(
-    `${p.name} ${p.inspiredBy} ${p.inspiredByBrand} ${p.description}`
-  );
-}
+import HeroFluidCanvas from "@/components/HeroFluidCanvas";
 
 export default function CatalogHome() {
-  const pack = getProductBySlug("spring-summer-pack");
   const all = useMemo(() => getCatalogGridProducts(), []);
-  const {
-    searchQuery,
-    setSearchQuery,
-    priceMin,
-    priceMax,
-    setPriceMin,
-    setPriceMax,
-    priceCeiling,
-    selectedBrands,
-    toggleBrand,
-    clearBrands,
-    sortBy,
-    setSortBy,
-  } = useCatalogFilters();
 
-  const brands = useMemo(() => {
-    const set = new Set<string>();
-    for (const p of all) {
-      if (p.kind === "pack") set.add("Dupe Testers");
-      else set.add(p.inspiredByBrand);
-    }
-    return [...set].sort((a, b) => a.localeCompare(b));
+  const catalogProducts = useMemo(() => {
+    return all
+      .filter((p) => p.kind !== "pack")
+      .sort(
+        (a, b) =>
+          b.reviewCount - a.reviewCount || a.name.localeCompare(b.name)
+      );
   }, [all]);
 
-  const filtered = useMemo(() => {
-    const q = normalize(searchQuery);
-    let list = all.filter((p) => {
-      if (q && !productSearchHaystack(p).includes(q)) return false;
-      if (p.price < priceMin || p.price > priceMax) return false;
-      if (selectedBrands.size > 0) {
-        const b = p.kind === "pack" ? "Dupe Testers" : p.inspiredByBrand;
-        if (!selectedBrands.has(b)) return false;
-      }
-      return true;
-    });
-
-    const packFirst = (a: Product, b: Product) => {
-      if (a.kind === "pack" && b.kind !== "pack") return -1;
-      if (b.kind === "pack" && a.kind !== "pack") return 1;
-      return 0;
-    };
-
-    list = [...list].sort((a, b) => {
-      switch (sortBy) {
-        case "price-asc":
-          return a.price - b.price || packFirst(a, b);
-        case "price-desc":
-          return b.price - a.price || packFirst(a, b);
-        case "rating":
-          return b.rating - a.rating || packFirst(a, b);
-        case "bestselling":
-        default:
-          return (
-            packFirst(a, b) ||
-            b.reviewCount - a.reviewCount ||
-            a.name.localeCompare(b.name)
-          );
-      }
-    });
-
-    return list;
-  }, [all, searchQuery, priceMin, priceMax, selectedBrands, sortBy]);
-
-  const jumpToLetter = (letter: string) => {
-    const el = document.getElementById(`brand-${letter}`);
-    el?.scrollIntoView({ block: "nearest", behavior: "smooth" });
-  };
-
-  const onMinChange = (v: number) => {
-    const next = Math.min(v, priceMax);
-    setPriceMin(next);
-  };
-  const onMaxChange = (v: number) => {
-    const next = Math.max(v, priceMin);
-    setPriceMax(next);
-  };
-
   return (
-    <div className="bg-cream text-neutral-800 min-h-screen">
-      <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-10 py-8 lg:py-12">
-        <div className="flex flex-col lg:flex-row gap-10 lg:gap-14">
-          {/* Sidebar */}
-          <aside className="w-full lg:w-[272px] shrink-0 space-y-8">
-            <div>
-              <label htmlFor="catalog-filter-search" className="sr-only">
-                Search testers
-              </label>
-              <input
-                id="catalog-filter-search"
-                type="search"
-                placeholder="Search this list…"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full border border-neutral-200 bg-white rounded-sm px-3 py-2.5 text-sm placeholder:text-neutral-400 focus:outline-none focus:ring-1 focus:ring-accent/40 focus:border-accent transition-[border-color,box-shadow] duration-300"
-              />
+    <section
+      id="fragrance-grid"
+      className="relative bg-editorial-surface px-4 pb-14 text-neutral-900 sm:px-5 sm:pb-16 lg:px-8 lg:pb-18"
+    >
+      <div className="mx-auto max-w-[1500px]">
+        <div className="relative overflow-hidden border border-black/8 bg-white/50 shadow-[0_18px_50px_rgba(17,17,17,0.04)] backdrop-blur-[2px]">
+          <HeroFluidCanvas opacity={0.08} />
+
+          <div className="relative z-2 grid grid-cols-1 gap-4 p-4 md:grid-cols-2 lg:grid-cols-12">
+            <div className="border border-black/8 bg-editorial-panel/45 p-6 md:col-span-2 sm:p-8 lg:col-span-4">
+              <p className="eyebrow">Choose your edit</p>
+              <h2 className="mt-4 max-w-[12ch] text-[clamp(2rem,4vw,3.25rem)] font-semibold tracking-tight text-neutral-950">
+                Individual fragrances
+              </h2>
+              <p className="mt-4 max-w-120 text-sm leading-7 text-neutral-700 sm:text-[15px]">
+                Build your own bundle or browse each scent one by one. These
+                are the five fragrances featured in the Spring / Summer edit.
+              </p>
+              <div className="mt-8 w-14 border-t border-black/10" />
+              <p className="mt-8 text-xs uppercase tracking-widest text-neutral-500">
+                Five scents / modular picks
+              </p>
             </div>
 
-            <details open className="border-b border-neutral-200/80 pb-6">
-              <summary className="cursor-pointer text-sm font-semibold text-neutral-900 list-none flex justify-between items-center">
-                Price
-                <span className="text-neutral-400 font-normal text-xs">▼</span>
-              </summary>
-              <div className="mt-4 space-y-4">
-                <div className="flex flex-col gap-2">
-                  <input
-                    type="range"
-                    min={0}
-                    max={priceCeiling}
-                    value={priceMin}
-                    onChange={(e) => onMinChange(Number(e.target.value))}
-                    className="w-full accent-accent h-1"
-                  />
-                  <input
-                    type="range"
-                    min={0}
-                    max={priceCeiling}
-                    value={priceMax}
-                    onChange={(e) => onMaxChange(Number(e.target.value))}
-                    className="w-full accent-accent h-1"
-                  />
-                </div>
-                <div className="grid grid-cols-2 gap-2">
-                  <div>
-                    <span className="text-[11px] text-neutral-500 uppercase tracking-wide">
-                      From
-                    </span>
-                    <input
-                      type="number"
-                      min={0}
-                      max={priceCeiling}
-                      value={priceMin}
-                      onChange={(e) => onMinChange(Number(e.target.value) || 0)}
-                      className="mt-1 w-full border border-neutral-300 rounded-sm px-2 py-1.5 text-sm"
-                    />
-                  </div>
-                  <div>
-                    <span className="text-[11px] text-neutral-500 uppercase tracking-wide">
-                      To
-                    </span>
-                    <input
-                      type="number"
-                      min={0}
-                      max={priceCeiling}
-                      value={priceMax}
-                      onChange={(e) =>
-                        onMaxChange(Number(e.target.value) || priceCeiling)
-                      }
-                      className="mt-1 w-full border border-neutral-300 rounded-sm px-2 py-1.5 text-sm"
-                    />
-                  </div>
-                </div>
+            {catalogProducts.map((p) => (
+              <div key={p.id} className="lg:col-span-4">
+                <RetailProductCard product={p} />
               </div>
-            </details>
-
-            <div>
-              <p className="text-sm font-semibold text-neutral-900 mb-2">
-                Brand
-              </p>
-              <div className="flex flex-wrap gap-1 mb-3">
-                {LETTERS.map((L) => (
-                  <button
-                    key={L}
-                    type="button"
-                    onClick={() => jumpToLetter(L)}
-                    className="text-[11px] w-6 h-6 flex items-center justify-center text-neutral-600 hover:text-accent hover:underline transition-colors duration-200"
-                  >
-                    {L}
-                  </button>
-                ))}
-              </div>
-              {selectedBrands.size > 0 && (
-                <button
-                  type="button"
-                  onClick={clearBrands}
-                  className="text-xs text-accent underline mb-2 transition-colors hover:text-accent-dark"
-                >
-                  Clear brands
-                </button>
-              )}
-              <div className="max-h-[320px] overflow-y-auto border border-neutral-200/80 bg-white rounded-sm divide-y divide-neutral-100 shadow-sm">
-                {LETTERS.map((letter) => {
-                  const group = brands.filter(
-                    (b) => b.charAt(0).toUpperCase() === letter
-                  );
-                  if (group.length === 0) return null;
-                  return (
-                    <div key={letter} id={`brand-${letter}`}>
-                      {group.map((brand) => (
-                        <label
-                          key={brand}
-                          className="flex items-center gap-2 px-3 py-2 text-sm hover:bg-neutral-50 cursor-pointer"
-                        >
-                          <input
-                            type="checkbox"
-                            checked={selectedBrands.has(brand)}
-                            onChange={() => toggleBrand(brand)}
-                            className="rounded border-neutral-300 accent-accent"
-                          />
-                          <span>{brand}</span>
-                        </label>
-                      ))}
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
-          </aside>
-
-          {/* Main */}
-          <div className="flex-1 min-w-0">
-            <header className="mb-8 lg:mb-10">
-              <h1 className="text-2xl lg:text-3xl font-bold text-neutral-900 tracking-tight">
-                Dupe testers
-              </h1>
-              <p className="mt-3 text-sm text-neutral-600 max-w-2xl leading-relaxed">
-                Small sampler vials of dupe fragrances — we curate packs of
-                five so you can try a seasonal edit at home. Individual lines
-                below show what&apos;s inside the Spring &amp; Summer pack;
-                only the pack is for sale right now.
-              </p>
-            </header>
-
-            {pack && (
-              <section className="mb-10 lg:mb-12 border border-neutral-200/70 rounded-md overflow-hidden bg-white shadow-sm ring-1 ring-black/[0.03]">
-                <div className="grid md:grid-cols-2 gap-0">
-                  <div className="relative aspect-[4/3] md:aspect-auto md:min-h-[300px] bg-white">
-                    <Image
-                      src={pack.images[0]}
-                      alt={pack.name}
-                      fill
-                      className="object-contain p-8"
-                      sizes="(max-width: 768px) 100vw, 50vw"
-                      priority
-                    />
-                  </div>
-                  <div className="p-6 lg:p-10 flex flex-col justify-center bg-cream/40">
-                    <p className="text-[11px] font-semibold uppercase tracking-widest text-accent mb-2">
-                      Featured — Summer collection
-                    </p>
-                    <h2 className="text-xl lg:text-2xl font-bold text-neutral-900">
-                      Spring &amp; Summer pack
-                    </h2>
-                    <p className="mt-3 text-sm text-neutral-600 leading-relaxed">
-                      Five × 2ml tester vials: Bergamot Haze, Ocean Neroli,
-                      Rose Absolute, Iris Silk, and Santal Dusk.{" "}
-                      {formatPrice(pack.price, pack.currency)} — add to cart on
-                      the product page.
-                    </p>
-                    <Link
-                      href="/products/spring-summer-pack"
-                      className="mt-6 inline-flex items-center justify-center w-fit px-6 py-3 bg-accent text-cream text-xs font-semibold uppercase tracking-wider hover:bg-accent-dark transition-[background-color,transform] duration-300 motion-safe:hover:-translate-y-0.5 shadow-sm"
-                    >
-                      View pack &amp; buy
-                    </Link>
-                  </div>
-                </div>
-              </section>
-            )}
-
-            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 py-4 border-y border-neutral-200/80 mb-8">
-              <label className="flex items-center gap-2 text-sm text-neutral-700">
-                <span className="text-neutral-500">Sort by:</span>
-                <select
-                  value={sortBy}
-                  onChange={(e) =>
-                    setSortBy(e.target.value as CatalogSort)
-                  }
-                  className="border border-neutral-200 rounded-sm px-2 py-1.5 text-sm bg-white focus:outline-none focus:ring-1 focus:ring-accent/35"
-                >
-                  <option value="bestselling">Best selling</option>
-                  <option value="price-asc">Price: low to high</option>
-                  <option value="price-desc">Price: high to low</option>
-                  <option value="rating">Rating</option>
-                </select>
-              </label>
-              <p className="text-sm text-neutral-600">
-                <span className="font-medium text-neutral-900">
-                  {filtered.length}
-                </span>{" "}
-                {filtered.length === 1 ? "product" : "products"}
-              </p>
-            </div>
-
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5 lg:gap-6">
-              {filtered.map((p) => (
-                <RetailProductCard key={p.id} product={p} />
-              ))}
-            </div>
-
-            {filtered.length === 0 && (
-              <p className="py-16 text-center text-neutral-500 text-sm">
-                No products match your filters. Try clearing search or brand
-                filters.
-              </p>
-            )}
+            ))}
           </div>
         </div>
       </div>
-    </div>
+    </section>
   );
 }

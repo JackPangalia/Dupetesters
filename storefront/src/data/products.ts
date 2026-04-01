@@ -1,4 +1,5 @@
 import type { Product, Collection, Review } from "@/lib/types";
+import { COLLECTION_CARD_IMAGE } from "@/data/editorial-assets";
 
 export const collections: Collection[] = [
   {
@@ -7,7 +8,7 @@ export const collections: Collection[] = [
     slug: "sampler-packs",
     description:
       "Five tester vials per pack — sample dupe fragrances that already exist on the market, curated by season.",
-    image: "https://images.unsplash.com/photo-1523293182086-7651a899d37f?w=800&q=80",
+    image: COLLECTION_CARD_IMAGE,
     productCount: 1,
   },
 ];
@@ -25,8 +26,8 @@ export const products: Product[] = [
     price: 42.99,
     currency: "GBP",
     images: [
-      "https://images.unsplash.com/photo-1523293182086-7651a899d37f?w=1200&q=85",
-      "https://images.unsplash.com/photo-1541643600914-78b084683601?w=1200&q=85",
+      "https://images.unsplash.com/photo-1556228578-0d85b1a4d571?w=1200&q=85&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1523293182086-7651a899d37f?w=1200&q=85&auto=format&fit=crop",
     ],
     category: "Pack",
     collection: "sampler-packs",
@@ -67,8 +68,8 @@ export const products: Product[] = [
     compareAtPrice: 240,
     currency: "GBP",
     images: [
-      "https://images.unsplash.com/photo-1541643600914-78b084683601?w=800&q=80",
-      "https://images.unsplash.com/photo-1594035910387-fea081e83b26?w=800&q=80",
+      "https://images.unsplash.com/photo-1587017539504-67cfbddac569?w=800&q=80&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1571781926291-c477ebfd024b?w=800&q=80&auto=format&fit=crop",
     ],
     category: "Unisex",
     collection: "designer-dupes",
@@ -102,8 +103,8 @@ export const products: Product[] = [
     compareAtPrice: 195,
     currency: "GBP",
     images: [
-      "https://images.unsplash.com/photo-1594035910387-fea081e83b26?w=800&q=80",
-      "https://images.unsplash.com/photo-1523293182086-7651a899d37f?w=800&q=80",
+      "https://images.unsplash.com/photo-1523293182086-7651a899d37f?w=800&q=80&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1540555700478-4be289fbecef?w=800&q=80&auto=format&fit=crop",
     ],
     category: "Unisex",
     collection: "niche-dupes",
@@ -137,8 +138,8 @@ export const products: Product[] = [
     compareAtPrice: 310,
     currency: "GBP",
     images: [
-      "https://images.unsplash.com/photo-1523293182086-7651a899d37f?w=800&q=80",
-      "https://images.unsplash.com/photo-1541643600914-78b084683601?w=800&q=80",
+      "https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=800&q=80&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1512496015851-a90fb38ba796?w=800&q=80&auto=format&fit=crop",
     ],
     category: "Masculine",
     collection: "designer-dupes",
@@ -172,8 +173,8 @@ export const products: Product[] = [
     compareAtPrice: 195,
     currency: "GBP",
     images: [
-      "https://images.unsplash.com/photo-1587017539504-67cfbddac569?w=800&q=80",
-      "https://images.unsplash.com/photo-1594035910387-fea081e83b26?w=800&q=80",
+      "https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=800&q=80&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1503602642458-232111445657?w=800&q=80&auto=format&fit=crop",
     ],
     category: "Unisex",
     collection: "niche-dupes",
@@ -207,8 +208,8 @@ export const products: Product[] = [
     compareAtPrice: 260,
     currency: "GBP",
     images: [
-      "https://images.unsplash.com/photo-1541643600914-78b084683601?w=800&q=80",
-      "https://images.unsplash.com/photo-1587017539504-67cfbddac569?w=800&q=80",
+      "https://images.unsplash.com/photo-1504198458649-3128b932f49e?w=800&q=80&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=800&q=80&auto=format&fit=crop",
     ],
     category: "Unisex",
     collection: "designer-dupes",
@@ -241,8 +242,8 @@ export const products: Product[] = [
     compareAtPrice: 195,
     currency: "GBP",
     images: [
-      "https://images.unsplash.com/photo-1594035910387-fea081e83b26?w=800&q=80",
-      "https://images.unsplash.com/photo-1523293182086-7651a899d37f?w=800&q=80",
+      "https://images.unsplash.com/photo-1541643600914-78b084683601?w=800&q=80&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1556228578-0d85b1a4d571?w=800&q=80&auto=format&fit=crop",
     ],
     category: "Feminine",
     collection: "niche-dupes",
@@ -276,8 +277,8 @@ export const products: Product[] = [
     compareAtPrice: 225,
     currency: "GBP",
     images: [
-      "https://images.unsplash.com/photo-1523293182086-7651a899d37f?w=800&q=80",
-      "https://images.unsplash.com/photo-1587017539504-67cfbddac569?w=800&q=80",
+      "https://images.unsplash.com/photo-1587017539504-67cfbddac569?w=800&q=80&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1503602642458-232111445657?w=800&q=80&auto=format&fit=crop",
     ],
     category: "Unisex",
     collection: "niche-dupes",
@@ -311,8 +312,8 @@ export const products: Product[] = [
     compareAtPrice: 240,
     currency: "GBP",
     images: [
-      "https://images.unsplash.com/photo-1587017539504-67cfbddac569?w=800&q=80",
-      "https://images.unsplash.com/photo-1541643600914-78b084683601?w=800&q=80",
+      "https://images.unsplash.com/photo-1512496015851-a90fb38ba796?w=800&q=80&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=800&q=80&auto=format&fit=crop",
     ],
     category: "Unisex",
     collection: "designer-dupes",
@@ -426,13 +427,6 @@ export function getCatalogGridProducts(): Product[] {
     (p): p is Product => !!p
   );
   return pack ? [pack, ...lines] : lines;
-}
-
-export function getCatalogPriceCeiling(): number {
-  const items = getCatalogGridProducts();
-  if (items.length === 0) return 100;
-  const maxP = Math.max(...items.map((p) => p.price));
-  return Math.max(100, Math.ceil(maxP / 5) * 5);
 }
 
 export function getNewArrivals(): Product[] {

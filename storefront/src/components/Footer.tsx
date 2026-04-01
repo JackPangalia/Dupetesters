@@ -22,17 +22,17 @@ const footerLinks = {
 
 export default function Footer() {
   return (
-    <footer className="bg-neutral-50 border-t border-neutral-200 text-neutral-700">
-      <div className="max-w-[1600px] mx-auto px-4 sm:px-5 lg:px-8 py-12 lg:py-14">
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-12">
+    <footer className="border-t border-black/8 bg-editorial-surface text-neutral-700">
+      <div className="max-w-[1600px] mx-auto px-4 sm:px-5 lg:px-8 py-14 lg:py-16">
+        <div className="grid grid-cols-2 gap-10 lg:grid-cols-4 lg:gap-12">
           <div className="col-span-2 lg:col-span-1">
             <Link
               href="/"
-              className="text-sm font-bold text-neutral-900 tracking-tight"
+              className="text-sm font-semibold tracking-tight text-neutral-950"
             >
               Dupe Testers
             </Link>
-            <p className="mt-4 text-sm text-neutral-600 leading-relaxed max-w-xs">
+            <p className="mt-4 max-w-xs text-sm leading-relaxed text-neutral-600">
               Packs of five dupe fragrance testers — we curate vials of scents
               that already exist on the market; we don&apos;t blend them.
             </p>
@@ -40,7 +40,7 @@ export default function Footer() {
 
           {Object.entries(footerLinks).map(([title, links]) => (
             <div key={title}>
-              <h4 className="text-xs font-semibold uppercase tracking-wide text-neutral-900 mb-4">
+              <h4 className="eyebrow mb-4 text-neutral-500">
                 {title}
               </h4>
               <ul className="space-y-2.5">
@@ -48,7 +48,7 @@ export default function Footer() {
                   <li key={link.href}>
                     <Link
                       href={link.href}
-                      className="text-sm text-neutral-600 hover:text-accent transition-colors duration-300"
+                      className="text-sm text-neutral-600 transition-colors duration-300 hover:text-neutral-950"
                     >
                       {link.label}
                     </Link>
@@ -60,8 +60,8 @@ export default function Footer() {
         </div>
       </div>
 
-      <div className="border-t border-neutral-200 bg-white">
-        <div className="max-w-[1600px] mx-auto px-4 sm:px-5 lg:px-8 py-5 flex flex-col md:flex-row items-center justify-between gap-3">
+      <div className="border-t border-black/8 bg-editorial-surface-soft">
+        <div className="max-w-[1600px] mx-auto flex flex-col items-center justify-between gap-3 px-4 py-5 sm:px-5 md:flex-row lg:px-8">
           <p className="text-xs text-neutral-500">
             &copy; {new Date().getFullYear()} Dupe Testers. All rights reserved.
           </p>

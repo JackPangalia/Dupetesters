@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Bodoni_Moda, Cormorant_Garamond, Outfit } from "next/font/google";
 import { CartProvider } from "@/lib/cart-context";
-import CatalogFilterProviderWrapper from "@/components/CatalogFilterProviderWrapper";
 import Header from "@/components/Header";
 import Main from "@/components/Main";
 import Footer from "@/components/Footer";
@@ -55,12 +54,10 @@ export default function RootLayout({
     <html lang="en" className={fontVars}>
       <body>
         <CartProvider>
-          <CatalogFilterProviderWrapper>
-            <Header />
-            <Main>{children}</Main>
-            <Footer />
-            <CartDrawer />
-          </CatalogFilterProviderWrapper>
+          <Header />
+          <Main>{children}</Main>
+          <Footer />
+          <CartDrawer />
         </CartProvider>
       </body>
     </html>
